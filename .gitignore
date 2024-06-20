@@ -1,0 +1,20 @@
+/demo/HELP.md
+/demo/.gradle
+/demo/build/
+!/demo/gradle/wrapper/gradle-wrapper.jar
+!/demo/**/src/main/**/build/
+!/demo/**/src/test/**/build/
+
+### STS ###
+/demo/.apt_generated
+/demo/.classpath
+/demo/.factorypath
+/demo/.project
+/demo/.settings
+/demo/.springBeans
+/demo/.sts4-cache
+/demo/bin/
+!/demo/**/src/main/**/bin/
+!/demo/**/src/test/**/bin/
+### VS Code ###
+.vscode/
