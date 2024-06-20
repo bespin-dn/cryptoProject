@@ -61,44 +61,55 @@
             border: 1px solid #ced4da;
             border-radius: 4px;
             font-size: 14px;
+            word-wrap: break-word; /* 텍스트가 박스를 넘어가지 않도록 줄 바꿈 설정 */
+            white-space: pre-wrap; /* 줄 바꿈과 공백을 유지 */
+            overflow-wrap: break-word; /* 긴 단어나 URL이 박스를 넘지 않도록 설정 */
         }
     </style>
+    <script>
+        function submitEncryptForm() {
+            const plainText = document.getElementById('plainText').value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/encrypt', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    document.getElementById('encryptResult').innerText = response.ciphertextString;
+                    document.getElementById('ciphertext').value = response.ciphertextString;
+                    document.getElementById('decryptButton').style.display = 'block';
+                }
+            };
+            xhr.send(JSON.stringify({ plaintext: plainText }));
+        }
+
+        function submitDecryptForm() {
+            const cipherText = document.getElementById('ciphertext').value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/decrypt', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    document.getElementById('decryptResult').innerText = response.plaintext;
+                }
+            };
+            xhr.send(JSON.stringify({ ciphertext: cipherText }));
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Encrypt Your Text</h1>
+        <h1>Encrypt and Decrypt Your Text</h1>
         <form id="encryptForm">
             <label for="plainText">Enter text to encrypt:</label>
             <input type="text" id="plainText" name="plainText" required>
-            <button type="button" onclick="submitForm()">Encrypt</button>
+            <button type="button" onclick="submitEncryptForm()">Encrypt</button>
         </form>
-        <div id="result" class="result"></div>
+        <div id="encryptResult" class="result"></div>
+        <input type="hidden" id="ciphertext">
+        <button id="decryptButton" type="button" onclick="submitDecryptForm()" style="display:none;">Decrypt</button>
+        <div id="decryptResult" class="result"></div>
     </div>
-    <p>Text: ${plaintext}</p>
-    <p>${ciphertextString}</p>
-    
-    <script>
-        function submitForm() {
-            const plainText = document.getElementById('plainText').value;
-
-            fetch('/encrypt', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ plainText: plainText })
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('result').innerHTML = 
-                    `<p><strong>Plain Text:</strong> ${plaintext}</p>
-                     <p><strong>Encrypted Text:</strong> ${ciphertextString}</p>`;
-            })
-            .catch(error => {
-                document.getElementById('result').innerHTML = 
-                    `<p style="color: red;"><strong>Error:</strong> ${error.message}</p>`;
-            });
-        }
-    </script>
 </body>
 </html>
