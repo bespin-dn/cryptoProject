@@ -74,12 +74,14 @@
         </form>
         <div id="result" class="result"></div>
     </div>
-
+    <p>Text: ${plaintext}</p>
+    <p>${ciphertextString}</p>
+    
     <script>
         function submitForm() {
             const plainText = document.getElementById('plainText').value;
 
-            fetch('/api/encrypt', {
+            fetch('/encrypt', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -89,8 +91,8 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('result').innerHTML = 
-                    `<p><strong>Plain Text:</strong> ${data.plainText}</p>
-                     <p><strong>Encrypted Text:</strong> ${data.encryptedText}</p>`;
+                    `<p><strong>Plain Text:</strong> ${plaintext}</p>
+                     <p><strong>Encrypted Text:</strong> ${ciphertextString}</p>`;
             })
             .catch(error => {
                 document.getElementById('result').innerHTML = 
