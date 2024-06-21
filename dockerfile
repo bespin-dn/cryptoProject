@@ -4,10 +4,10 @@ FROM openjdk:22-jdk
 WORKDIR /app
 
 # Build 아티팩트 복사
-COPY ./demo/build/libs/demo-0.0.1-SNAPSHOT.jar /app
+COPY ./demo/build/libs/demo-0.0.1-SNAPSHOT.war /app
 
 # Run Application
-CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.war"]
 
 # # git Clone
 # RUN git clone https://github.com/bespin-dn/cryptoProject.git
