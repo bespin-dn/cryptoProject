@@ -18,3 +18,8 @@
 !/demo/**/src/test/**/bin/
 ### VS Code ###
 .vscode/
+
+### Terraform ###
+/eks/.terraform
+/eks/.terraform.lock.hcl
+/eks/terraform.tfstate**
