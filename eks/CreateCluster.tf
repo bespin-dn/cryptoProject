@@ -9,7 +9,8 @@ resource "aws_eks_cluster" "eksCluster" {
 
     depends_on = [
         aws_iam_role_policy_attachment.AmazonEKSClusterPolicyAttach,
-        aws_iam_role_policy_attachment.AmazonEKSVPCResourceControllerAttach
+        aws_iam_role_policy_attachment.AmazonEKSVPCResourceControllerAttach,
+        aws_iam_role_policy_attachment.eksClusterKMSAccessRoleAttach
     ]
 }
 
@@ -24,9 +25,9 @@ resource "aws_eks_node_group" "eksNodeGroup" {
     instance_types = [var.instance_type]
 
     scaling_config {
-        desired_size = 2
-        min_size =2
-        max_size = 4
+        desired_size = 3
+        min_size =1
+        max_size = 5
     }
 
     update_config {

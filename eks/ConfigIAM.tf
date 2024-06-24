@@ -57,3 +57,29 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnlyAtt
     policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
     role = aws_iam_role.eksNodeGroupRole.name
 }
+
+## Create KMS Policy and Role
+resource "aws_iam_policy" "eksClusterKMSAccessPolicy" {
+    name = "GSEKSClusterKMSAccessPolicy"
+    description = "GSEKSClusterKMSAccessPolicy by terraform"
+
+    policy = jsonencode({
+        Version: "2012-10-17",
+        Statement: [
+            {
+                Effect: "Allow",
+                Action: [
+                    "kms:Encrypt",
+                    "kms:Decrypt",
+                    "kms:GenerateDataKey"
+                ],
+                Resource: "arn:aws:kms:ap-southeast-2:603229842386:key/5d32d411-248d-4a7c-90ec-f88d37741a08"
+            }
+        ]
+    })
+
+}
+resource "aws_iam_role_policy_attachment" "eksClusterKMSAccessRoleAttach" {
+    policy_arn = aws_iam_policy.eksClusterKMSAccessPolicy.arn
+    role = aws_iam_role.eksClusterRole.name
+}

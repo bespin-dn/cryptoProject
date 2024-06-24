@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: crypto
+  name: crypto-deployment
+spec:
+  selector:
+    matchLabels:
+      app: crypto-deployment
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: crypto-deployment
+    spec:
+      containers:
+      - image: 603229842386.dkr.ecr.ap-southeast-2.amazonaws.com/gs-cryptproject:latest
+        imagePullPolicy: Always
+        name: crypto-deployment
+        ports:
+        - containerPort: 8080
+
