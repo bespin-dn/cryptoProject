@@ -73,7 +73,7 @@ resource "aws_iam_policy" "eksClusterKMSAccessPolicy" {
                     "kms:Decrypt",
                     "kms:GenerateDataKey"
                 ],
-                Resource: "arn:aws:kms:ap-southeast-2:603229842386:key/5d32d411-248d-4a7c-90ec-f88d37741a08"
+                Resource: "<KMS_ID>"
             }
         ]
     })
