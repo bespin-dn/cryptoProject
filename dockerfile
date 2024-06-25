@@ -8,15 +8,3 @@ COPY ./demo/build/libs/demo-0.0.1-SNAPSHOT.war /app
 
 # Run Application
 CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.war"]
-
-# # git Clone
-# RUN git clone https://github.com/bespin-dn/cryptoProject.git
-# RUN cd cryptoProject/demo
-
-# # Build Gradle
-# RUN chmod 500 gradlew
-# RUN ./gradlew build
-
-# # Run Application
-# CMD [ "executable" ]
-
