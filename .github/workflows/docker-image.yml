@@ -21,8 +21,8 @@ jobs:
         distribution: 'corretto'
         cache: 'gradle'
 
-    - name: Run chmod to make gradlew executable
-      run: chmod +x ./demo/gradlew
+    # - name: Run chmod to make gradlew executable
+    #   run: chmod +x ./demo/gradlew
 
     - name: Gradle Build cryptoApp
       uses: gradle/actions/setup-gradle@v3
