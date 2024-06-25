@@ -25,10 +25,10 @@ jobs:
       run: chmod +x ./demo/gradlew
 
     - name: Gradle Build cryptoApp
-      uses: gradle/gradle-build-action@v3
+      uses: gradle/actions/setup-gradle@v3
       with:
         arguments: build
-      working-directory: ${{ env.WORKING_DIRECTORY }}
+        build-root-directory: ./demo
 
     - name: Docker build cryptoApp
       run: docker build -t gs-cryptproject .
