@@ -30,6 +30,7 @@ jobs:
         build-root-directory: ./demo
     - name: Build with Gradle
       run: ./gradlew build
+      working-directory: ./demo
 
     - name: Docker build cryptoApp
       run: docker build -t gs-cryptproject .
