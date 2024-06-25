@@ -73,7 +73,7 @@ resource "aws_iam_policy" "eksClusterKMSAccessPolicy" {
                     "kms:Decrypt",
                     "kms:GenerateDataKey"
                 ],
-                Resource: "<KMS_ID>"
+                Resource: "arn:aws:kms:ap-southeast-2:603229842386:key/5d32d411-248d-4a7c-90ec-f88d37741a08"
             }
         ]
     })
@@ -82,4 +82,8 @@ resource "aws_iam_policy" "eksClusterKMSAccessPolicy" {
 resource "aws_iam_role_policy_attachment" "eksClusterKMSAccessRoleAttach" {
     policy_arn = aws_iam_policy.eksClusterKMSAccessPolicy.arn
     role = aws_iam_role.eksClusterRole.name
+}
+resource "aws_iam_role_policy_attachment" "eksNodeGropKMSAccessRoleAttach" {
+    policy_arn = aws_iam_policy.eksClusterKMSAccessPolicy.arn
+    role = aws_iam_role.eksNodeGroupRole.name
 }
