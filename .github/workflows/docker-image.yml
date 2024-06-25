@@ -21,12 +21,13 @@ jobs:
         cache: 'gradle'
 
     - name: Run chmod to make gradlew executable
-      run: chmod +x gradlew
+      run: chmod +x ./demo/gradlew
 
     - name: Gradle Build cryptoApp
       uses: gradle/gradle-build-action@v3
       with:
         arguments: build
+      working-directory: ./demo
 
     - name: Docker build cryptoApp
       run: docker build -t gs-cryptproject .
