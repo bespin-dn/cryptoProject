@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
 env:
   AWS_REGION: ap-southeast-2
+  WORKING_DIRECTORY: ./demo
 jobs:
 
   build:
@@ -27,7 +28,7 @@ jobs:
       uses: gradle/gradle-build-action@v3
       with:
         arguments: build
-      working-directory: ./demo
+      working-directory: ${{ env.WORKING_DIRECTORY }}
 
     - name: Docker build cryptoApp
       run: docker build -t gs-cryptproject .
