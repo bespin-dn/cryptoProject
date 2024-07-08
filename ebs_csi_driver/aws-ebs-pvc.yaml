@@ -2,11 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: gs-ebs-claim
+  namespace: crypto
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: gs-gp3
   resources:
     requests:
       storage: 8Gi
-  storageClassName: gs-gp3
-
