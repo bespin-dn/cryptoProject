@@ -6,5 +6,5 @@ WORKDIR /app
 # Build 아티팩트 복사
 COPY ./demo/build/libs/demo-0.0.1-SNAPSHOT.war /app
 
-# Run Application
+# Run Application/
 CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.war"]
